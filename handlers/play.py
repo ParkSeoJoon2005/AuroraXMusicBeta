@@ -48,7 +48,7 @@ def cb_admin_check(func: Callable) -> Callable:
         if cb.from_user.id in admemes:
             return await func(client, cb)
         else:
-            await cb.answer("💡 only admin can tap this button !", show_alert=True)
+            await cb.answer("**🚀only admin can tap this button...!**", show_alert=True)
             return
 
     return decorator
@@ -114,12 +114,6 @@ async def playlist(client, message):
 
     keyboard = InlineKeyboardMarkup(
         [
-            [
-                InlineKeyboardButton("• Gʀᴏᴜᴘ", url=f"https://t.me/{GROUP_SUPPORT}"),
-                InlineKeyboardButton(
-                    "• Cʜᴀɴɴᴇʟ", url=f"https://t.me/{UPDATES_CHANNEL}"
-                ),
-            ]
         ]
     )
 
@@ -128,13 +122,13 @@ async def playlist(client, message):
         return
     queue = que.get(message.chat.id)
     if not queue:
-        await message.reply_text("❌ **no music is currently playing**")
+        await message.reply_text("❌**No music is currently playing...!**")
     temp = []
     for t in queue:
         temp.append(t)
     now_playing = temp[0][0]
     by = temp[0][1].mention(style="md")
-    msg = "💡 **now playing** on {}".format(message.chat.title)
+    msg = "🎵**Now Playing** on {}".format(message.chat.title)
     msg += "\n\n• " + now_playing
     msg += "\n• Req By " + by
     temp.pop(0)
@@ -152,7 +146,7 @@ async def playlist(client, message):
 
 def updated_stats(chat, queue, vol=100):
     if chat.id in callsmusic.pytgcalls.active_calls:
-        stats = "⚙ settings for **{}**".format(chat.title)
+        stats = "⚙Settings for **{}**".format(chat.title)
         if len(que) > 0:
             stats += "\n\n"
             stats += "• volume: `{}%`\n".format(vol)
@@ -205,7 +199,7 @@ async def settings(client, message):
             await message.reply(stats, reply_markup=r_ply("play"))
     else:
         await message.reply(
-            "😕 **voice chat not found**\n\n» please turn on the voice chat first"
+            "😕**Voice Chat not Found**\n\n»**Please Start A Voice Chat First!**"
         )
 
 
@@ -230,24 +224,24 @@ async def music_onoff(_, message):
     status = message.text.split(None, 1)[1]
     message.chat.id
     if status in ("ON", "on", "On"):
-        lel = await message.reply("`processing...`")
+        lel = await message.reply("`Processing...`")
         if not message.chat.id in DISABLED_GROUPS:
-            await lel.edit("» **music player already turned on.**")
+            await lel.edit("» **Aurora X Music Already Turned On!****")
             return
         DISABLED_GROUPS.remove(message.chat.id)
-        await lel.edit(f"✅ **music player turned on**\n\n💬 `{message.chat.id}`")
+        await lel.edit(f"✅ **Aurora X Music turned on**\n\n💬 `{message.chat.id}`")
 
     elif status in ("OFF", "off", "Off"):
-        lel = await message.reply("`processing...`")
+        lel = await message.reply("`Processing...`")
 
         if message.chat.id in DISABLED_GROUPS:
-            await lel.edit("» **music player already turned off.**")
+            await lel.edit("» **Aurora X Music Already Turned Off.**")
             return
         DISABLED_GROUPS.append(message.chat.id)
-        await lel.edit(f"✅ **music player turned off**\n\n💬 `{message.chat.id}`")
+        await lel.edit(f"✅ **Aurora X Music turned off**\n\n💬 `{message.chat.id}`")
     else:
         await message.reply_text(
-            "**• usage:**\n\n `/music on` & `/music off`"
+            "**• Usage:**\n\n `/music on` & `/music off`"
         )
 
 
@@ -275,13 +269,13 @@ async def p_cb(b, cb):
     if type_ == "playlist":
         queue = que.get(cb.message.chat.id)
         if not queue:
-            await cb.message.edit("❌ **no music is currently playing**")
+            await cb.message.edit("❌**No music is currently playing...!**")
         temp = []
         for t in queue:
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "💡 **now playing** on {}".format(cb.message.chat.title)
+        msg = "💡 **Now playing** on {}".format(cb.message.chat.title)
         msg += "\n\n• " + now_playing
         msg += "\n• Req by " + by
         temp.pop(0)
@@ -304,13 +298,7 @@ async def m_cb(b, cb):
 
     keyboard = InlineKeyboardMarkup(
         [
-            [
-                InlineKeyboardButton("• Gʀᴏᴜᴘ", url=f"https://t.me/{GROUP_SUPPORT}"),
-                InlineKeyboardButton(
-                    "• Cʜᴀɴɴᴇʟ", url=f"https://t.me/{UPDATES_CHANNEL}"
-                ),
-            ],
-            [InlineKeyboardButton("🔙 Go Back", callback_data="menu")],
+            
         ]
     )
 
@@ -333,7 +321,7 @@ async def m_cb(b, cb):
             callsmusic.pytgcalls.active_calls[chet_id] == "paused"
         ):
             await cb.answer(
-                "userbot is not connected to voice chat.", show_alert=True
+                "**Userbot is not connected to voice chat...!**", show_alert=True
             )
         else:
             callsmusic.pytgcalls.pause_stream(chet_id)
@@ -909,7 +897,7 @@ async def ytplay(_, message: Message):
     global que
     if message.chat.id in DISABLED_GROUPS:
         return
-    lel = await message.reply("🔎 **searching...**")
+    lel = await message.reply("🔎**Searching...!**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
 
@@ -939,7 +927,7 @@ async def ytplay(_, message: Message):
                 try:
                     await USER.join_chat(invitelink)
                     await lel.edit(
-                        f"✅ **userbot succesfully entered chat**",
+                        f"✅**Userbot Succesfully Entered Chat...!**",
                     )
 
                 except UserAlreadyParticipant:
@@ -954,7 +942,7 @@ async def ytplay(_, message: Message):
         await USER.get_chat(chid)
     except:
         await lel.edit(
-            f"» **userbot not in this chat or is banned in this group !**\n\n**unban @{ASSISTANT_NAME} and add to this group again manually, or type /reload then try again.**"
+            f"» **Userbot not in this chat or is banned in this group !**\n\n**unban @{ASSISTANT_NAME} and add to this group again manually, or type /reload then try again.**"
         )
         return
 
@@ -962,7 +950,7 @@ async def ytplay(_, message: Message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    await lel.edit("🔄 **connecting to vc...**")
+    await lel.edit("🔄**Connecting to Voice Chat...!**")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()

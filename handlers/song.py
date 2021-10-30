@@ -38,7 +38,7 @@ ydl_opts = {
 @Client.on_message(command(["song", f"song@{bn}"]) & ~filters.edited)
 def song(_, message):
     query = " ".join(message.command[1:])
-    m = message.reply("***🔎Finding song...***")
+    m = message.reply("***Finding Song...!***")
     ydl_ops = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -54,7 +54,7 @@ def song(_, message):
         m.edit("❌Song not found!\n\n*Please give a valid song name!*\n\n**NOTE:- Try {Song Name}{Artist} Format To Get The Best Results**")
         print(str(e))
         return
-    m.edit("Downloading file...!")
+    m.edit("Downloading File...!")
     try:
         with yt_dlp.YoutubeDL(ydl_ops) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -76,7 +76,7 @@ def song(_, message):
         )
         m.delete()
     except Exception as e:
-        m.edit("❌Error 401, Wait for Developer to fix")
+        m.edit("❌Error 401,Wait for Developer to fix")
         print(e)
 
     try:
