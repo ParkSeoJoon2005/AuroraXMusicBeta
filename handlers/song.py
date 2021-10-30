@@ -55,6 +55,9 @@ def song(_, message):
         print(str(e))
         return
     m.edit("Downloading File...!")
+    m.edit("█░░░░░░░░░░ 12% ")
+    m.edit("███░░░░░░░░ 31% ")
+    m.edit("█████████░░ 86% ")    
     try:
         with yt_dlp.YoutubeDL(ydl_ops) as ydl:
             info_dict = ydl.extract_info(link, download=False)
