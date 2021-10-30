@@ -55,9 +55,13 @@ def song(_, message):
         print(str(e))
         return
     m.edit("Downloading File...!")
-    m.edit("█░░░░░░░░░░ 12% ")
-    m.edit("███░░░░░░░░ 31% ")
-    m.edit("█████████░░ 86% ")    
+    m.edit("█░░░░░░░░░░ 02% ")
+    m.edit("██░░░░░░░░░ 10% ")
+    m.edit("███░░░░░░░░ 27% ")
+    m.edit("██████░░░░░ 45% ")
+    m.edit("████████░░░ 70% ")
+    m.edit("███████████ 100% ")
+     
     try:
         with yt_dlp.YoutubeDL(ydl_ops) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -69,6 +73,7 @@ def song(_, message):
             dur += int(float(dur_arr[i])) * secmul
             secmul *= 60
         m.edit("Uploading file...!")
+        m.edit("█████░░░░░░")
         message.reply_audio(
             audio_file,
             caption=rep,
